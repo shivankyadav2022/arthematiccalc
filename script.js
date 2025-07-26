@@ -1,1 +1,0 @@
-prompt("Let's Make A Calculator")

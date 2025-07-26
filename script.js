@@ -24,8 +24,27 @@ function divide(a,b){
     return divide;
 }
 
-console.log(add(2,4));
-console.log(subtract(5,8));
-console.log(multiply(3,4));
-console.log(divide(10,5));
-console.log(divide(10,0));
+function operate (a,b,operation){
+    let result=0;
+    switch(operation) {
+        case "add":
+            result =add(a,b);
+            break;
+        case "sub":
+            result=subtract(a,b);
+            break;
+        case "mul":
+            result=multiply(a,b);
+            break;
+        case "div":
+            result=divide(a,b);
+            break;
+        default:
+            result =0;
+
+    }
+    return result;
+}
+
+console.log(operate(1,0,"div"));
+console

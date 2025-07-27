@@ -24,6 +24,7 @@ function divide(a,b){
     return divide;
 }
 
+// operate function that takes operands and operators as parameters 
 function operate (a,b,operation){
     let result=0;
     switch(operation) {
@@ -46,5 +47,40 @@ function operate (a,b,operation){
     return result;
 }
 
-console.log(operate(1,0,"div"));
-console
+// make reset and backspace button
+
+const resetPanel = document.querySelector("#resetPanel");
+const resetButton = document.createElement("button");
+const backspaceButton = document.createElement("button");
+
+// name the buttons and assign them id name 
+resetButton.textContent='Reset';
+resetButton.id ='resetButton';
+backspaceButton.textContent = 'Delete';
+backspaceButton.id='backspaceButton';
+
+//attach them to calc master container
+resetPanel.appendChild(resetButton);
+resetPanel.appendChild(backspaceButton);
+
+//function to display button 
+
+function createButton(displayText,idName,parent){
+    const name = document.createElement("button");
+    name.textContent = displayText;
+    name.id = idName;
+    parent.appendChild(name);
+    return name;
+
+}
+
+const numberPanel = document.querySelector("#numbersAndSymbols");
+
+const oneButton = createButton('1','oneButton',numberPanel);
+const twoButton = createButton('2','twoButton',numberPanel);
+const threeButton = createButton('3','threeButton',numberPanel);
+const addButton = createButton('+','addButton',numberPanel);
+const fourButton = createButton('4','fourButton',numberPanel);
+const fiveButton = createButton('5','fiveButton',numberPanel);
+const sixButton = createButton('6','sixButton',numberPanel);
+const minusButton = createButton('-','minusBUtton',numberPanel);

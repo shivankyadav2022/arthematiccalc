@@ -1,4 +1,30 @@
-body{
+*{
     border: 2px solid black;
 }
 
+.container{
+    height:450px;
+    width:325px;
+    background-color: grey;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#display{
+    height:100px;
+    width:300px;
+    margin:10px;
+}
+
+#resetPanel{
+    height:50px;
+    width:300px;
+    margin:10px;
+}
+
+#numbersAndSymbols{
+    height:250px;
+    width:300px;
+    margin:10px;
+}

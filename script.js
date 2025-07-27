@@ -69,18 +69,53 @@ function createButton(displayText,idName,parent){
     const name = document.createElement("button");
     name.textContent = displayText;
     name.id = idName;
+    name.className='numAndSym';
     parent.appendChild(name);
     return name;
 
 }
+//buttons on the left side panel
+const leftSide = document.querySelector("#leftSide");
 
-const numberPanel = document.querySelector("#numbersAndSymbols");
+const oneButton = createButton('1','oneButton',leftSide);
+const twoButton = createButton('2','twoButton',leftSide);
+const threeButton = createButton('3','threeButton',leftSide);
 
-const oneButton = createButton('1','oneButton',numberPanel);
-const twoButton = createButton('2','twoButton',numberPanel);
-const threeButton = createButton('3','threeButton',numberPanel);
-const addButton = createButton('+','addButton',numberPanel);
-const fourButton = createButton('4','fourButton',numberPanel);
-const fiveButton = createButton('5','fiveButton',numberPanel);
-const sixButton = createButton('6','sixButton',numberPanel);
-const minusButton = createButton('-','minusBUtton',numberPanel);
+const fourButton = createButton('4','fourButton',leftSide);
+const fiveButton = createButton('5','fiveButton',leftSide);
+const sixButton = createButton('6','sixButton',leftSide);
+
+const sevenButton = createButton('7','sevenButton',leftSide);
+const eightButton = createButton('8','eightButton',leftSide);
+const nineButton = createButton('9','nineButton',leftSide);
+
+const multiplyButton = createButton('*','mutiplyButton',leftSide);
+const zeroButton = createButton('0','zeroButton',leftSide);
+const divideButton = createButton('/','divideButton',leftSide);
+
+//buttons on the right side of panel 
+
+const rightUpper = document.querySelector("#rightUpper");
+
+const addButton = createButton('+','addButton',rightUpper);
+const minusButton = createButton('-','minusBUtton',rightUpper);
+
+// button on the right side lower part 
+
+const rightLower = document.querySelector("#rightLower");
+
+const equalButton = createButton('=','equalButton',rightLower);
+
+
+
+//select display container 
+const calcDisplay = document.querySelector("#display");
+
+
+// display calculator content
+function displayResult (resultDisplay){
+    calcDisplay.textContent=resultDisplay;
+
+}
+
+displayResult(operate(12233333333,2222222,"add"));

@@ -1,6 +1,7 @@
-*{
+/**{
     border: 2px solid black;
-}
+}*/
+
 
 .container{
     height:450px;
@@ -9,22 +10,89 @@
     display:flex;
     flex-direction: column;
     align-items: center;
+    box-shadow: 5px 5px 10px ;
+    border-radius:10px;
+    margin:auto;
 }
 
 #display{
     height:100px;
     width:300px;
     margin:10px;
+    background-color: white;
+    text-align: right;
+    font-size: 40px;
+    font-weight: 900;
+    font-family: 'monospace' ,sans-serif;
+    overflow-wrap: anywhere;
+    display:flex;
+    align-items: flex-end;
+    justify-content:right;
+    border-radius:10px;
 }
 
 #resetPanel{
     height:50px;
     width:300px;
     margin:10px;
+    display:flex;
+    justify-content: space-around;
+    align-items:center;
 }
 
+#resetButton{
+    width: 40%;
+    height:80%;
+    background-color: rgb(139, 139, 224);
+    box-shadow: 5px 5px 10px ;
+    border-radius:10px;
+}
+
+#backspaceButton{
+    width:40%;
+    height:80%;
+    background-color: rgb(219, 144, 144);
+    box-shadow: 5px 5px 10px ;
+    border-radius:10px;
+}
 #numbersAndSymbols{
     height:250px;
     width:300px;
     margin:10px;
+    display:flex;
+    justify-content: center;
+}
+
+.numAndSym{
+    width:33%;
+    height:25%;
+    box-shadow: 5px 5px 10px ;
+    border-radius:20px;
+    background-color: rgb(236, 98, 47);
+    font-weight: 900;
+    font-size:30px;
+}
+
+#rightSide{
+    display:flex;
+    flex-direction:column;
+    width:25%;
+}
+
+#rightUpper{
+    height:50%;
+    display:flex;
+    flex-direction:column;
+    justify-content: stretch;
+}
+
+
+#rightUpper .numAndSym{
+    width:60px;
+    height:65px;
+}
+
+#rightLower .numAndSym{
+    width:60px;
+    height:125px;
 }

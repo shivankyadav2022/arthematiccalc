@@ -27,17 +27,18 @@ function divide(a,b){
 // operate function that takes operands and operators as parameters 
 function operate (a,b,operation){
     let result=0;
+    console.log("inside operate");
     switch(operation) {
-        case "add":
+        case "+":
             result =add(a,b);
             break;
-        case "sub":
+        case "-":
             result=subtract(a,b);
             break;
-        case "mul":
+        case "*":
             result=multiply(a,b);
             break;
-        case "div":
+        case "/":
             result=divide(a,b);
             break;
         default:
@@ -77,19 +78,19 @@ function createButton(displayText,idName,parent){
 //buttons on the left side panel
 const leftSide = document.querySelector("#leftSide");
 
-const oneButton = createButton('1','oneButton',leftSide);
-const twoButton = createButton('2','twoButton',leftSide);
-const threeButton = createButton('3','threeButton',leftSide);
+const sevenButton = createButton('7','sevenButton',leftSide);
+const eightButton = createButton('8','eightButton',leftSide);
+const nineButton = createButton('9','nineButton',leftSide);
 
 const fourButton = createButton('4','fourButton',leftSide);
 const fiveButton = createButton('5','fiveButton',leftSide);
 const sixButton = createButton('6','sixButton',leftSide);
 
-const sevenButton = createButton('7','sevenButton',leftSide);
-const eightButton = createButton('8','eightButton',leftSide);
-const nineButton = createButton('9','nineButton',leftSide);
+const oneButton = createButton('1','oneButton',leftSide);
+const twoButton = createButton('2','twoButton',leftSide);
+const threeButton = createButton('3','threeButton',leftSide);
 
-const multiplyButton = createButton('*','mutiplyButton',leftSide);
+const multiplyButton = createButton('*','multiplyButton',leftSide);
 const zeroButton = createButton('0','zeroButton',leftSide);
 const divideButton = createButton('/','divideButton',leftSide);
 
@@ -98,7 +99,7 @@ const divideButton = createButton('/','divideButton',leftSide);
 const rightUpper = document.querySelector("#rightUpper");
 
 const addButton = createButton('+','addButton',rightUpper);
-const minusButton = createButton('-','minusBUtton',rightUpper);
+const minusButton = createButton('-','minusButton',rightUpper);
 
 // button on the right side lower part 
 
@@ -113,9 +114,156 @@ const calcDisplay = document.querySelector("#display");
 
 
 // display calculator content
-function displayResult (resultDisplay){
+function displayValue (resultDisplay){
     calcDisplay.textContent=resultDisplay;
 
 }
+//let finalResult = operate(12233333333.33,2222222,"add")
+//displayValue(finalResult);
 
-displayResult(operate(12233333333,2222222,"add"));
+//event listeners for buttons 
+
+resetButton.addEventListener("click",() => {
+    displayValue(0);
+    firstOperand="";
+    secondOperand="";
+});
+/*backspaceButton.addEventListener("click",()=>{
+    let resultStr = calcDisplay.textContent;
+    resultStr = resultStr.slice(0,-1);
+    displayValue(resultStr);
+});*/
+// Define operands and result variables 
+let firstOperand="";
+let secondOperand="";
+let operationResult;
+console.log(firstOperand);
+
+// add event listener to all buttons to store values 
+const allNumAndSyms = document.querySelectorAll(".numAndSym")
+allNumAndSyms.forEach((bttn)=>{
+    bttn.addEventListener("click",function(){
+    switch (bttn.id){
+        case "oneButton":
+            numEventHandling("1");
+            console.log(secondOperand);
+            break;
+        case "twoButton":
+            numEventHandling("2");
+            break;
+        case "threeButton":
+            numEventHandling("3");
+            break;
+        case "fourButton" :
+            numEventHandling("4");
+            break;
+        case"fiveButton":
+            numEventHandling("5");
+            break;
+        case "sixButton":
+            numEventHandling("6");
+            break;
+        case "sevenButton":
+            numEventHandling("7");
+            break;
+        case "eightButton":
+            numEventHandling("8");
+            break;
+        case "nineButton": 
+            numEventHandling("9");
+            break;
+        case "zeroButton":
+            numEventHandling("0");
+            break;
+        case "addButton":
+            symEventHandling("+");
+            break;
+        case "minusButton":
+            symEventHandling("-");
+            break;
+        case "multiplyButton":
+            symEventHandling("*");
+            break;
+        case "divideButton":
+            symEventHandling("/");
+            break;
+        case "equalButton":
+            symEventHandling("=");
+            break;
+        default:
+            displayValue(0);
+    };
+});
+});
+
+//add event listener to buttons for results 
+
+
+// function for numbers event handling 
+
+function numEventHandling(num){
+    //if last letter is symbol 
+    const lastLetter = firstOperand.charAt(firstOperand.length-1);
+    if(["+","-","*","/"].includes(lastLetter)){
+    //start new string oin second operator 
+        secondOperand=secondOperand+num;
+        // add number and display 
+        displayValue(secondOperand);
+    }
+    else{
+    //else add number to last of string
+        if(calcDisplay.textContent===firstOperand){
+            firstOperand=firstOperand+num;
+            displayValue(firstOperand);
+        }
+        else{
+            secondOperand=secondOperand+num;
+            displayValue(secondOperand);
+        }
+        // display the string 
+
+    }
+
+
+}
+//functions for symbols event handling
+function symEventHandling(sym){
+    console.log("Inside sym event handler");
+//if second operand is empty
+if(secondOperand===""){
+     //check if last letter is a symbol 
+     let lastChar = firstOperand.charAt(firstOperand.length-1);
+     if(lastChar==="+" || lastChar==="-" || lastChar==="*"){
+         // if yes - replace the earlier symbol with the current symbol 
+         firstOperand = firstOperand.slice(0,-1) + sym;
+     }
+     else{
+        firstOperand = firstOperand+sym;
+        console.log(firstOperand);
+     }
+     displayValue(firstOperand);
+}
+       
+    // if second operand is not null 
+    else{
+        //compute the result of earlier expression 
+        let firstOperandNum = +(firstOperand.slice(0,-1));
+        console.log(firstOperandNum);
+        let secondOperandNum = +secondOperand;
+        let operator = firstOperand[firstOperand.length-1];
+        console.log(operator);
+        finalResult=operate(firstOperandNum,secondOperandNum,operator);
+        // display the result 
+        displayValue(finalResult);
+        //store the result in first operand variable 
+        firstOperand = finalResult.toString();
+        secondOperand ="";
+        console.log("inside else of sym event handler");
+        console.log(`first : ${firstOperand}`);
+        console.log(`second : ${secondOperand}`);
+
+    }
+        
+}
+ let finalResult=0;
+    

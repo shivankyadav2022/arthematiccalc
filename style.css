@@ -2,7 +2,19 @@
     border: 2px solid black;
 }*/
 
+body{
+    background-color: #222831;
+}
 
+h1 {
+  font-size: 36px;
+  color: #ff5722; /* Same orange as your buttons for strong visual identity */
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 30px;
+  letter-spacing: 1px;
+}
 .container{
     height:450px;
     width:325px;

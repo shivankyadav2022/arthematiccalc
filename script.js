@@ -130,11 +130,17 @@ resetButton.addEventListener("click",() => {
     firstOperand="";
     secondOperand="";
 });
-/*backspaceButton.addEventListener("click",()=>{
-    let resultStr = calcDisplay.textContent;
-    resultStr = resultStr.slice(0,-1);
-    displayValue(resultStr);
-});*/
+backspaceButton.addEventListener("click",()=>{
+    console.log("inside backspace")
+    if(calcDisplay.textContent===firstOperand){
+        firstOperand=firstOperand.slice(0,-1);
+        displayValue(firstOperand);
+    }
+    else{
+        secondOperand=secondOperand.slice(0,-1);
+        displayValue(secondOperand);
+    }
+});
 // Define operands and result variables 
 let firstOperand="";
 let secondOperand="";
@@ -218,6 +224,7 @@ function numEventHandling(num){
             firstOperand=firstOperand+num;
             displayValue(firstOperand);
         }
+
         else{
             secondOperand=secondOperand+num;
             displayValue(secondOperand);

@@ -62,6 +62,7 @@ resetButton.id ='resetButton';
 backspaceButton.textContent = 'Delete';
 backspaceButton.id='backspaceButton';
 
+
 //attach them to calc master container
 resetPanel.appendChild(resetButton);
 resetPanel.appendChild(backspaceButton);
@@ -141,6 +142,8 @@ backspaceButton.addEventListener("click",()=>{
         displayValue(secondOperand);
     }
 });
+
+
 // Define operands and result variables 
 let firstOperand="";
 let secondOperand="";
@@ -283,6 +286,70 @@ if(secondOperand===""){
         
 }
  let finalResult=0;
+
+ //keyboard support for the calculator
+document.addEventListener("keydown",(event)=>{
+    switch(event.key){
+        case 'Backspace':
+            if(calcDisplay.textContent===firstOperand){
+                firstOperand=firstOperand.slice(0,-1);
+                displayValue(firstOperand); 
+             }
+            else{
+                secondOperand=secondOperand.slice(0,-1);
+                displayValue(secondOperand);
+            }
+            break;
+        case "1":
+            numEventHandling("1");
+            console.log(secondOperand);
+            break;
+        case "2":
+            numEventHandling("2");
+            break;
+        case "3":
+            numEventHandling("3");
+            break;
+        case "4" :
+            numEventHandling("4");
+            break;
+        case"5":
+            numEventHandling("5");
+            break;
+        case "6":
+            numEventHandling("6");
+            break;
+        case "7":
+            numEventHandling("7");
+            break;
+        case "8":
+            numEventHandling("8");
+            break;
+        case "9": 
+            numEventHandling("9");
+            break;
+        case "0":
+            numEventHandling("0");
+            break;
+        case "+":
+            symEventHandling("+");
+            break;
+        case "-":
+            symEventHandling("-");
+            break;
+        case "*":
+            symEventHandling("*");
+            break;
+        case "/":
+            symEventHandling("/");
+            break;
+        case "Enter":
+            symEventHandling("=");
+            break;
+        
+
+    }
+})
 
 
     

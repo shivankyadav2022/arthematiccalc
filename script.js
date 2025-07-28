@@ -41,6 +41,8 @@ function operate (a,b,operation){
         case "/":
             result=divide(a,b);
             break;
+        case "=":
+            
         default:
             result =0;
 
@@ -124,7 +126,7 @@ function displayValue (resultDisplay){
 //event listeners for buttons 
 
 resetButton.addEventListener("click",() => {
-    displayValue(0);
+    displayValue("");
     firstOperand="";
     secondOperand="";
 });
@@ -233,12 +235,20 @@ function symEventHandling(sym){
 if(secondOperand===""){
      //check if last letter is a symbol 
      let lastChar = firstOperand.charAt(firstOperand.length-1);
-     if(lastChar==="+" || lastChar==="-" || lastChar==="*"){
-         // if yes - replace the earlier symbol with the current symbol 
-         firstOperand = firstOperand.slice(0,-1) + sym;
+     if(lastChar==="+" || lastChar==="-" || lastChar==="*" || lastChar==="/"|| lastChar==="="){
+        if (lastChar ==="="){
+            firstOperand=firstOperand.slice(0,-1);
+        }
+        else{
+            // if yes - replace the earlier symbol with the current symbol 
+            if(sym !=="="){
+            firstOperand = firstOperand.slice(0,-1) + sym;
+            }
+        }
      }
      else{
-        firstOperand = firstOperand+sym;
+        if(sym !=="="){
+        firstOperand = firstOperand+sym;}
         console.log(firstOperand);
      }
      displayValue(firstOperand);
@@ -266,4 +276,6 @@ if(secondOperand===""){
         
 }
  let finalResult=0;
+
+
     

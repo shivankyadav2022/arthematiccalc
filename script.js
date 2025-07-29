@@ -27,7 +27,6 @@ function divide(a,b){
 // operate function that takes operands and operators as parameters 
 function operate (a,b,operation){
     let result=0;
-    console.log("inside operate");
     switch(operation) {
         case "+":
             result =add(a,b);
@@ -50,6 +49,135 @@ function operate (a,b,operation){
     return result;
 }
 
+//function to display button 
+
+function createButton(displayText,idName,parent){
+    const name = document.createElement("button");
+    name.textContent = displayText;
+    name.id = idName;
+    name.className='numAndSym';
+    parent.appendChild(name);
+    return name;
+
+}
+
+// display calculator content
+function displayValue (resultDisplay){
+    calcDisplay.textContent=resultDisplay;
+
+}
+
+// function for numbers event handling 
+
+function numEventHandling(num){
+    //remove the leading zero after reset 
+    if(firstOperand[0]==="0"){
+        firstOperand=firstOperand.slice(1);
+        displayValue(firstOperand);
+    }
+    if(secondOperand[0]==="0"){
+        secondOperand=secondOperand.slice(1);
+        displayValue(secondOperand);
+    }
+    //if last letter is symbol 
+    const lastLetter = firstOperand.charAt(firstOperand.length-1);
+    if(["+","-","*","/"].includes(lastLetter)){
+    //start new string oin second operator 
+        secondOperand=secondOperand+num;
+        // add number and display 
+        displayValue(secondOperand);
+    }
+    else{
+    //else add number to last of string
+        if(calcDisplay.textContent===firstOperand){
+            firstOperand=firstOperand+num;
+            displayValue(firstOperand);
+        }
+
+        else{
+            secondOperand=secondOperand+num;
+            displayValue(secondOperand);
+        }
+        // display the string 
+
+    }
+
+
+}
+//functions for symbols event handling
+function symEventHandling(sym){
+//if second operand is empty
+if(secondOperand===""){
+     //check if last letter is a symbol 
+     let lastChar = firstOperand.charAt(firstOperand.length-1);
+     if(lastChar==="+" || lastChar==="-" || lastChar==="*" || lastChar==="/"|| lastChar==="="){
+        if (lastChar ==="="){
+            firstOperand=firstOperand.slice(0,-1);
+        }
+        else{
+            // if yes - replace the earlier symbol with the current symbol 
+            if(sym !=="="){
+            firstOperand = firstOperand.slice(0,-1) + sym;
+            }
+        }
+     }
+     else{
+        if(sym !=="="){
+        firstOperand = firstOperand+sym;}
+     }
+     displayValue(firstOperand);
+}
+       
+    // if second operand is not null 
+    else{
+        //compute the result of earlier expression 
+        let firstOperandNum = +(firstOperand.slice(0,-1));
+        let secondOperandNum = +secondOperand;
+        let operator = firstOperand[firstOperand.length-1];
+        finalResult=operate(firstOperandNum,secondOperandNum,operator);
+        // display the result 
+        displayValue(finalResult);
+        //store the result in first operand variable 
+        firstOperand = finalResult.toString();
+        secondOperand ="";
+    }
+        
+}
+
+ //function decimal event handling 
+ function decimalEventHandling(){
+         if(secondOperand===""){
+                if(firstOperand.includes(".")){
+                    firstOperand=firstOperand;
+                    displayValue(firstOperand);
+                }
+                else{
+                    firstOperand=firstOperand+".";
+                    displayValue(firstOperand);
+                }
+            }
+            else{
+                if(secondOperand.includes(".")){
+                    secondOperand=secondOperand;
+                    displayValue(secondOperand);
+                }
+                else{
+                    secondOperand=secondOperand+".";
+                    displayValue(secondOperand);
+
+                }
+
+            }
+
+ }
+
+
+// Define operands and result variables 
+let firstOperand="";
+let secondOperand="";
+let operationResult;
+let finalResult=0;
+
 // make reset and backspace button
 
 const resetPanel = document.querySelector("#resetPanel");
@@ -67,17 +195,7 @@ backspaceButton.id='backspaceButton';
 resetPanel.appendChild(resetButton);
 resetPanel.appendChild(backspaceButton);
 
-//function to display button 
 
-function createButton(displayText,idName,parent){
-    const name = document.createElement("button");
-    name.textContent = displayText;
-    name.id = idName;
-    name.className='numAndSym';
-    parent.appendChild(name);
-    return name;
-
-}
 //buttons on the left side panel
 const numsAndSyms = document.querySelector("#numbersAndSymbols");
 
@@ -105,23 +223,18 @@ const equalButton = createButton('=','equalButton',numsAndSyms);
 const calcDisplay = document.querySelector("#display");
 
 
-// display calculator content
-function displayValue (resultDisplay){
-    calcDisplay.textContent=resultDisplay;
 
-}
 //let finalResult = operate(12233333333.33,2222222,"add")
 //displayValue(finalResult);
 
 //event listeners for buttons 
 
 resetButton.addEventListener("click",() => {
-    displayValue("");
-    firstOperand="";
+    firstOperand="0";
     secondOperand="";
+    displayValue(firstOperand);
 });
 backspaceButton.addEventListener("click",()=>{
-    console.log("inside backspace")
     if(calcDisplay.textContent===firstOperand){
         firstOperand=firstOperand.slice(0,-1);
         displayValue(firstOperand);
@@ -130,14 +243,18 @@ backspaceButton.addEventListener("click",()=>{
         secondOperand=secondOperand.slice(0,-1);
         displayValue(secondOperand);
     }
+    //prevent from leaving the screen completely blank
+    if(firstOperand.length===0){
+        firstOperand=firstOperand+"0";
+        displayValue(firstOperand);
+    }
+    if(secondOperand.length===0){
+        secondOperand=secondOperand+"0";
+        displayValue(secondOperand);
+    }
 });
 
 
-// Define operands and result variables 
-let firstOperand="";
-let secondOperand="";
-let operationResult;
-console.log(firstOperand);
 
 // add event listener to all buttons to store values 
 const allNumAndSyms = document.querySelectorAll(".numAndSym")
@@ -146,7 +263,6 @@ allNumAndSyms.forEach((bttn)=>{
     switch (bttn.id){
         case "oneButton":
             numEventHandling("1");
-            console.log(secondOperand);
             break;
         case "twoButton":
             numEventHandling("2");
@@ -202,112 +318,7 @@ allNumAndSyms.forEach((bttn)=>{
 //add event listener to buttons for results 
 
 
-// function for numbers event handling 
 
-function numEventHandling(num){
-    //if last letter is symbol 
-    const lastLetter = firstOperand.charAt(firstOperand.length-1);
-    if(["+","-","*","/"].includes(lastLetter)){
-    //start new string oin second operator 
-        secondOperand=secondOperand+num;
-        // add number and display 
-        displayValue(secondOperand);
-    }
-    else{
-    //else add number to last of string
-        if(calcDisplay.textContent===firstOperand){
-            firstOperand=firstOperand+num;
-            displayValue(firstOperand);
-        }
-
-        else{
-            secondOperand=secondOperand+num;
-            displayValue(secondOperand);
-        }
-        // display the string 
-
-    }
-
-
-}
-//functions for symbols event handling
-function symEventHandling(sym){
-    console.log("Inside sym event handler");
-//if second operand is empty
-if(secondOperand===""){
-     //check if last letter is a symbol 
-     let lastChar = firstOperand.charAt(firstOperand.length-1);
-     if(lastChar==="+" || lastChar==="-" || lastChar==="*" || lastChar==="/"|| lastChar==="="){
-        if (lastChar ==="="){
-            firstOperand=firstOperand.slice(0,-1);
-        }
-        else{
-            // if yes - replace the earlier symbol with the current symbol 
-            if(sym !=="="){
-            firstOperand = firstOperand.slice(0,-1) + sym;
-            }
-        }
-     }
-     else{
-        if(sym !=="="){
-        firstOperand = firstOperand+sym;}
-        console.log(firstOperand);
-     }
-     displayValue(firstOperand);
-}
-       
-    // if second operand is not null 
-    else{
-        //compute the result of earlier expression 
-        let firstOperandNum = +(firstOperand.slice(0,-1));
-        console.log(firstOperandNum);
-        let secondOperandNum = +secondOperand;
-        let operator = firstOperand[firstOperand.length-1];
-        console.log(operator);
-        finalResult=operate(firstOperandNum,secondOperandNum,operator);
-        // display the result 
-        displayValue(finalResult);
-        //store the result in first operand variable 
-        firstOperand = finalResult.toString();
-        secondOperand ="";
-        console.log("inside else of sym event handler");
-        console.log(`first : ${firstOperand}`);
-        console.log(`second : ${secondOperand}`);
-
-    }
-        
-}
- let finalResult=0;
-
- //function decimal event handling 
- function decimalEventHandling(){
-         if(secondOperand===""){
-                if(firstOperand.includes(".")){
-                    firstOperand=firstOperand;
-                    displayValue(firstOperand);
-                    console.log("inside first if ");
-                }
-                else{
-                    firstOperand=firstOperand+".";
-                    displayValue(firstOperand);
-                    console.log("inside first else");
-                }
-            }
-            else{
-                if(secondOperand.includes(".")){
-                    secondOperand=secondOperand;
-                    displayValue(secondOperand);
-                    console.log("inside second if")
-                }
-                else{
-                    secondOperand=secondOperand+".";
-                    displayValue(secondOperand);
-                    console.log("inside secpnd else")
-                }
-
-            }
-
- }
 
  //keyboard support for the calculator
 document.addEventListener("keydown",(event)=>{
@@ -321,10 +332,16 @@ document.addEventListener("keydown",(event)=>{
                 secondOperand=secondOperand.slice(0,-1);
                 displayValue(secondOperand);
             }
+              //prevent from leaving the screen completely blank
+            /*if(firstOperand.length===0){
+                displayValue("0");
+            }
+            if(secondOperand.length===0){
+                displayValue("0");
+            }*/
             break;
         case "1":
             numEventHandling("1");
-            console.log(secondOperand);
             break;
         case "2":
             numEventHandling("2");

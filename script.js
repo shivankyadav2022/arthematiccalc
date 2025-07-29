@@ -64,11 +64,23 @@ function createButton(displayText,idName,parent){
     return name;
 
 }
-
+const displayText = document.querySelector("#displayText");
 // display calculator content
-function displayValue (resultDisplay){
-    calcDisplay.textContent=resultDisplay;
-
+function displayValue(resultDisplay){
+    displayText.textContent = resultDisplay;
+    fitToWidth();
+}
+window.addEventListener("load",()=>fitToWidth());
+window.addEventListener("resize",()=>fitToWidth())
+//function to fit text to width of container 
+function fitToWidth(){
+    let fontSize = 40;
+    displayText.style.fontSize = fontSize + 'px';
+    
+    while (displayText.scrollWidth > calcDisplay.clientWidth && fontSize > 5) {
+        fontSize -= 1;
+        displayText.style.fontSize = fontSize + 'px';
+    }
 }
 
 // function for numbers event handling 

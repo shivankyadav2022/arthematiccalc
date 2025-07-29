@@ -25,10 +25,11 @@ h1 {
     box-shadow: 5px 5px 10px ;
     border-radius:10px;
     margin:auto;
+    flex-grow: 1;
 }
 
 #display{
-    height:100px;
+    min-height:100px;
     width:300px;
     margin:10px;
     background-color: white;
@@ -36,12 +37,20 @@ h1 {
     font-size: 40px;
     font-weight: 900;
     font-family: 'monospace' ,sans-serif;
-    overflow:auto;
     display:flex;
     align-items: flex-end;
     justify-content:right;
     border-radius:10px;
+    overflow:hidden;
+    white-space:nowrap;
     
+}
+
+#displayText{
+    display:inline-block;
+    white-space:nowrap;
+    font-size:40px;
+
 }
 
 #resetPanel{

@@ -73,38 +73,15 @@ h1 {
     margin:10px;
     display:flex;
     justify-content: center;
+    flex-wrap:wrap;
 }
 
 .numAndSym{
-    width:33%;
+    width:25%;
     height:25%;
     box-shadow: 5px 5px 10px ;
     border-radius:20px;
     background-color: rgb(236, 98, 47);
     font-weight: 900;
     font-size:30px;
-}
-
-#rightSide{
-    display:flex;
-    flex-direction:column;
-    width:25%;
-}
-
-#rightUpper{
-    height:50%;
-    display:flex;
-    flex-direction:column;
-    justify-content: stretch;
-}
-
-
-#rightUpper .numAndSym{
-    width:60px;
-    height:65px;
-}
-
-#rightLower .numAndSym{
-    width:60px;
-    height:125px;
 }

@@ -79,38 +79,27 @@ function createButton(displayText,idName,parent){
 
 }
 //buttons on the left side panel
-const leftSide = document.querySelector("#leftSide");
+const numsAndSyms = document.querySelector("#numbersAndSymbols");
 
-const sevenButton = createButton('7','sevenButton',leftSide);
-const eightButton = createButton('8','eightButton',leftSide);
-const nineButton = createButton('9','nineButton',leftSide);
+const sevenButton = createButton('7','sevenButton',numsAndSyms);
+const eightButton = createButton('8','eightButton',numsAndSyms);
+const nineButton = createButton('9','nineButton',numsAndSyms);
+const addButton = createButton('+','addButton',numsAndSyms);
 
-const fourButton = createButton('4','fourButton',leftSide);
-const fiveButton = createButton('5','fiveButton',leftSide);
-const sixButton = createButton('6','sixButton',leftSide);
+const fourButton = createButton('4','fourButton',numsAndSyms);
+const fiveButton = createButton('5','fiveButton',numsAndSyms);
+const sixButton = createButton('6','sixButton',numsAndSyms);
+const minusButton = createButton('-','minusButton',numsAndSyms);
 
-const oneButton = createButton('1','oneButton',leftSide);
-const twoButton = createButton('2','twoButton',leftSide);
-const threeButton = createButton('3','threeButton',leftSide);
+const oneButton = createButton('1','oneButton',numsAndSyms);
+const twoButton = createButton('2','twoButton',numsAndSyms);
+const threeButton = createButton('3','threeButton',numsAndSyms);
+const decimalButton= createButton('.','decimalButton',numsAndSyms);
 
-const multiplyButton = createButton('*','multiplyButton',leftSide);
-const zeroButton = createButton('0','zeroButton',leftSide);
-const divideButton = createButton('/','divideButton',leftSide);
-
-//buttons on the right side of panel 
-
-const rightUpper = document.querySelector("#rightUpper");
-
-const addButton = createButton('+','addButton',rightUpper);
-const minusButton = createButton('-','minusButton',rightUpper);
-
-// button on the right side lower part 
-
-const rightLower = document.querySelector("#rightLower");
-
-const equalButton = createButton('=','equalButton',rightLower);
-
-
+const multiplyButton = createButton('*','multiplyButton',numsAndSyms);
+const zeroButton = createButton('0','zeroButton',numsAndSyms);
+const divideButton = createButton('/','divideButton',numsAndSyms);
+const equalButton = createButton('=','equalButton',numsAndSyms);
 
 //select display container 
 const calcDisplay = document.querySelector("#display");

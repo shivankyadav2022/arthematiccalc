@@ -344,6 +344,7 @@ document.addEventListener("keydown",(event)=>{
             symEventHandling("/");
             break;
         case "Enter":
+            event.preventDefault();
             symEventHandling("=");
             break;
         

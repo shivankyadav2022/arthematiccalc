@@ -175,6 +175,9 @@ allNumAndSyms.forEach((bttn)=>{
         case "zeroButton":
             numEventHandling("0");
             break;
+        case "decimalButton":
+            decimalEventHandling();
+            break;
         case "addButton":
             symEventHandling("+");
             break;
@@ -276,6 +279,36 @@ if(secondOperand===""){
 }
  let finalResult=0;
 
+ //function decimal event handling 
+ function decimalEventHandling(){
+         if(secondOperand===""){
+                if(firstOperand.includes(".")){
+                    firstOperand=firstOperand;
+                    displayValue(firstOperand);
+                    console.log("inside first if ");
+                }
+                else{
+                    firstOperand=firstOperand+".";
+                    displayValue(firstOperand);
+                    console.log("inside first else");
+                }
+            }
+            else{
+                if(secondOperand.includes(".")){
+                    secondOperand=secondOperand;
+                    displayValue(secondOperand);
+                    console.log("inside second if")
+                }
+                else{
+                    secondOperand=secondOperand+".";
+                    displayValue(secondOperand);
+                    console.log("inside secpnd else")
+                }
+
+            }
+
+ }
+
  //keyboard support for the calculator
 document.addEventListener("keydown",(event)=>{
     switch(event.key){
@@ -331,6 +364,9 @@ document.addEventListener("keydown",(event)=>{
             break;
         case "/":
             symEventHandling("/");
+            break;
+        case ".":
+            decimalEventHandling();
             break;
         case "Enter":
             event.preventDefault();

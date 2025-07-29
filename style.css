@@ -36,11 +36,12 @@ h1 {
     font-size: 40px;
     font-weight: 900;
     font-family: 'monospace' ,sans-serif;
-    overflow-wrap: anywhere;
+    overflow:auto;
     display:flex;
     align-items: flex-end;
     justify-content:right;
     border-radius:10px;
+    
 }
 
 #resetPanel{

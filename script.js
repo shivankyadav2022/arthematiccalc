@@ -13,7 +13,9 @@ function subtract(a,b){
 //define multiple function 
 function multiply(a,b){
     let multiply = a*b;
-    return multiply;
+    const roundedString = multiply.toFixed(2);
+    const convertedNum = parseFloat(roundedString);
+    return convertedNum;
 }
 
 //define divide function 
@@ -21,7 +23,9 @@ function divide(a,b){
     if(b===0)
         return "Can't Divide By Zero";
     let divide = a/b;
-    return divide;
+    const roundedString = divide.toFixed(2);
+    const convertedNum = parseFloat(roundedString);
+    return convertedNum;
 }
 
 // operate function that takes operands and operators as parameters 
@@ -243,15 +247,7 @@ backspaceButton.addEventListener("click",()=>{
         secondOperand=secondOperand.slice(0,-1);
         displayValue(secondOperand);
     }
-    //prevent from leaving the screen completely blank
-    if(firstOperand.length===0){
-        firstOperand=firstOperand+"0";
-        displayValue(firstOperand);
-    }
-    if(secondOperand.length===0){
-        secondOperand=secondOperand+"0";
-        displayValue(secondOperand);
-    }
+    
 });
 
 
@@ -332,13 +328,7 @@ document.addEventListener("keydown",(event)=>{
                 secondOperand=secondOperand.slice(0,-1);
                 displayValue(secondOperand);
             }
-              //prevent from leaving the screen completely blank
-            /*if(firstOperand.length===0){
-                displayValue("0");
-            }
-            if(secondOperand.length===0){
-                displayValue("0");
-            }*/
+
             break;
         case "1":
             numEventHandling("1");
